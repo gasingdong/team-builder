@@ -1,12 +1,11 @@
 import React, { ReactElement, useState } from 'react'
+import { TeamMember } from '../App'
 
-function Form(): ReactElement {
-  interface TeamMember {
-    name: string
-    email: string
-    role: string
-  }
+interface FormProps {
+  addToTeam: (team: string, teamMember: TeamMember) => void
+}
 
+function Form(props: FormProps): ReactElement {
   const [teamMember, setTeamMember] = useState<TeamMember>({
     name: '',
     email: '',
