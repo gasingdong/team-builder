@@ -92,7 +92,13 @@ function Form({
   return (
     <form onSubmit={onSubmit}>
       <label htmlFor="team">Team:</label>
-      <input type="text" id="team" value={team} onChange={onChangeTeam} />
+      <input
+        type="text"
+        id="team"
+        value={team}
+        onChange={onChangeTeam}
+        disabled={memberToEdit ? true : false}
+      />
       <label htmlFor="name">Name:</label>
       <input
         type="text"
