@@ -6,9 +6,15 @@ interface TeamInfo {
   name: string
   members: TeamMember[]
   setMemberToEdit: (member: TeamMember) => void
+  setTeamToEdit: (team: string) => void
 }
 
-function TeamCard({ name, members, setMemberToEdit }: TeamInfo): ReactElement {
+function TeamCard({
+  name,
+  members,
+  setMemberToEdit,
+  setTeamToEdit,
+}: TeamInfo): ReactElement {
   return (
     <div>
       <h1>{name}</h1>
@@ -18,6 +24,8 @@ function TeamCard({ name, members, setMemberToEdit }: TeamInfo): ReactElement {
             key={`${name}-${member.name}`}
             member={member}
             setMemberToEdit={setMemberToEdit}
+            team={name}
+            setTeamToEdit={setTeamToEdit}
           />
         )
       )}
