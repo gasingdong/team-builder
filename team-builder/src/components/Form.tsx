@@ -37,8 +37,39 @@ function Form({
     }
   }, [memberToEdit, teamToEdit])
 
+  const validate = (team: string, member: TeamMember): boolean => {
+    if (!team || !member.name || !member.email || !member.role) {
+      alert('All fields are required!')
+      return false
+    }
+    if (!RegExp('^[A-Z0-9 ]+$', 'gi').test(team)) {
+      alert('Team names can only have letters, numbers, and spaces')
+      return false
+    }
+    //Name validation
+    if (!RegExp('^[A-Z ]+[A-Z]$', 'gi').test(member.name)) {
+      alert('Names can only have letters and spaces')
+      return false
+    }
+    //E-mail validation
+    if (!RegExp('^[A-Z0-9]+@[A-Z0-9.-]+.[A-Z]{2,}$', 'gi').test(member.email)) {
+      alert('Please enter a valid e-mail')
+      return false
+    }
+    //Role validation
+    if (!RegExp('^[A-Z ]+[A-Z]$', 'gi').test(member.role)) {
+      alert('Roles can only have letters and spaces')
+      return false
+    }
+    return true
+  }
+
   const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
+
+    if (!validate(team, teamMember)) {
+      return
+    }
 
     memberToEdit ? editMember(team, teamMember) : addMember(team, teamMember)
     setTeam('')
