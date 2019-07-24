@@ -10,6 +10,9 @@ export interface TeamMember {
 
 const App: React.FC = (): ReactElement => {
   const [teams, setTeams] = useState<Record<string, TeamMember[]>>({})
+  const [memberToEdit, setMemberToEdit] = useState<TeamMember | undefined>(
+    undefined
+  )
 
   const addToTeam = (teamName: string, teamMember: TeamMember): void => {
     const existingTeam = teams[teamName]
@@ -26,7 +29,12 @@ const App: React.FC = (): ReactElement => {
       <Form addToTeam={addToTeam} />
       {Object.keys(teams).map(
         (teamName: string): ReactElement => (
-          <TeamCard key={teamName} name={teamName} members={teams[teamName]} />
+          <TeamCard
+            key={teamName}
+            name={teamName}
+            members={teams[teamName]}
+            setMemberToEdit={setMemberToEdit}
+          />
         )
       )}
     </div>

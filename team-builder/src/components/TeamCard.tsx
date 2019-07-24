@@ -5,9 +5,10 @@ import TeamMemberCard from './TeamMemberCard'
 interface TeamInfo {
   name: string
   members: TeamMember[]
+  setMemberToEdit: (member: TeamMember) => void
 }
 
-function TeamCard({ name, members }: TeamInfo): ReactElement {
+function TeamCard({ name, members, setMemberToEdit }: TeamInfo): ReactElement {
   return (
     <div>
       <h1>{name}</h1>
@@ -15,9 +16,8 @@ function TeamCard({ name, members }: TeamInfo): ReactElement {
         (member: TeamMember): ReactElement => (
           <TeamMemberCard
             key={`${name}-${member.name}`}
-            name={member.name}
-            email={member.email}
-            role={member.role}
+            member={member}
+            setMemberToEdit={setMemberToEdit}
           />
         )
       )}
